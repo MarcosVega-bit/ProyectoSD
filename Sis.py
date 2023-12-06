@@ -114,4 +114,19 @@ if __name__ == "__main__":
                 for z in range(r):
                     t[z] += 1
                 while x < len(hosts):
-                    cur.execute('INSERT INTO INVENTARIO')
+                    cur.execute('INSERT INTO INVENTARIO (idSucursal, producto, cantidad) VALUES (?, ?, ?)', (x+1, idP-1, t[x]))
+                    x += 1
+                bd.commit()
+                print("Se agregó el artículo", a, "correctamente.")
+            elif choice == '5':
+                cur.execute('SELECT * FROM INVENTARIO')
+                print("(idSucursal, producto, cantidad)")
+                for fila in cur:
+                    print(fila)
+            elif choice == '6':
+                cur.execute('SELECT * FROM PRODUCTO')
+                print("(idProducto, nombre, total)")
+                for fila in cur:
+                    print(fila)
+        except ValueError:
+            print("Entrada inválida. Ingrese un número válido o '0' para salir.")
