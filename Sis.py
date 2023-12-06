@@ -48,7 +48,7 @@ if __name__ == "__main__":
     idC += 1
 
   i = 1
-j = -1
+  j = -1
 while (i < idP):
     cur.execute('SELECT total FROM PRODUCTO WHERE idProducto = ?', (i, ))
     a = cur.fetchone()
