@@ -114,4 +114,4 @@ if __name__ == "__main__":
                 for z in range(r):
                     t[z] += 1
                 while x < len(hosts):
-                    cur.execute('INSERT INTO INVENTARIO (
+                    cur.execute('INSERT INTO INVENTARIO)
