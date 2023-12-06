@@ -5,7 +5,7 @@ import sqlite3
 import random
 import MWf
 
-bd = sqlite3.connect('/home/Marcos/base.sqlite')
+bd = sqlite3.connect('/home/root/base.sqlite')
 cur = bd.cursor()
 idP = 1
 idC = 1
