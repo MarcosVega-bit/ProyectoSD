@@ -47,30 +47,35 @@ if __name__ == "__main__":
     cur.execute('INSERT INTO CLIENTE (idCliente, nombre, apPaterno, apMaterno) VALUES (?,?,?,?)',(idC,'Marcos','Vega','Alvarez'))
     idC += 1
 
-    i = 1
-    j = -1
-    while (i < idP):
-        cur.execute('SELECT total FROM PRODUCTO WHERE idProducto = ?',(i, ))
-        a = cur.fetchone()
-        n = a[0]
-        m = len(hosts)
-        t = [n//m]*m
-        r = n % m
-        for x in range(r):
-            t[x] += 1
-        hn = locals.gethostname()
-        ipl = locals.gethostbyname(hn)
-        if (ipl == hosts[0]):
-            j = 1
-        elif (ipl == hosts[1]):
-            j = 2
-        elif (ipl == hosts[2]):
-            j = 3
-        elif (ipl == hosts[3]):
-            j = 4
-        cur.execute('INSERT INTO INVENTARIO (idSucursal, producto, cantidad) VALUES (?,?,?)',(j,i,t[j-1]))
-        i += 1
-    bd.commit()
+  i = 1
+j = -1
+while (i < idP):
+    cur.execute('SELECT total FROM PRODUCTO WHERE idProducto = ?', (i, ))
+    a = cur.fetchone()
+    n = a[0]
+    m = len(hosts)
+    t = [n//m]*m
+    r = n % m
+
+    for x in range(r):
+        t[x] += 1
+
+    hn = socket.gethostname()
+    ipl = socket.gethostbyname(hn)
+
+    if ipl == hosts[0]:
+        j = 1
+    elif ipl == hosts[1]:
+        j = 2
+    elif ipl == hosts[2]:
+        j = 3
+    elif ipl == hosts[3]:
+        j = 4
+
+    cur.execute('INSERT INTO INVENTARIO (idSucursal, producto, cantidad) VALUES (?,?,?)', (j, i, t[j-1]))
+    i += 1
+
+bd.commit()
     #conn.close()
     
     # Iniciar los servidores en cada máquina virtual
