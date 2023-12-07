@@ -58,8 +58,8 @@ def mensaje(server_ip, server_port, message):
 if __name__ == "__main__":
     # Configuración de los servidores en cada máquina virtual
     hosts = [
-        "192.168.153.128",
-        "192.168.153.129",
+        "192.168.159.130",
+        "192.168.159.134",
         "192.168.153.130",
         "192.168.153.131"
     ]
