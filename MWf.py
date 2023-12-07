@@ -14,7 +14,7 @@ def cliente(conn, addr):
         print(f'Mensaje recibido de {addr}: {received_message}')
         
         # Almacenar mensaje recibido en un archivo
-        with open(f"/home/eduardo/msgs.txt", "a") as file:
+        with open(f"/home/marcos_25/msgs.txt", "a") as file:
             file.write(f"[Recibido] {time.strftime('%Y-%m-%d %H:%M:%S')} - {received_message}\n")
         
         # Enviar un mensaje de confirmación al cliente
@@ -52,7 +52,7 @@ def mensaje(server_ip, server_port, message):
         print(f"Respuesta del servidor {server_ip}:{server_port}: {decoded_response}")
         
         # Almacenar mensaje de confirmación recibido en un archivo
-        with open(f"/home/eduardo/msgs.txt", "a") as file:
+        with open(f"/home/marcos_25/msgs.txt", "a") as file:
             file.write(f"[Recibido] {time.strftime('%Y-%m-%d %H:%M:%S')} - {decoded_response}\n")
 
 if __name__ == "__main__":
