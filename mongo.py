@@ -4,7 +4,7 @@ import random
 from pymongo import MongoClient
 
 # Conexión a MongoDB
-client = MongoClient('mongodb://localhost:27017/')  # Reemplaza con la URL de tu servidor MongoDB
+client = MongoClient('mongodb://192.168.159.130/')  # Reemplaza con la URL de tu servidor MongoDB
 db = client['mi_base_de_datos']  # Reemplaza con el nombre de tu base de datos
 
 idP = 1
