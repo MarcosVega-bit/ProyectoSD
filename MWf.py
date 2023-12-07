@@ -66,9 +66,9 @@ if __name__ == "__main__":
     port = 12345  # Puerto para la comunicación entre las máquinas
 
     # Iniciar los servidores en cada máquina virtual
-    #for host in hosts:
-    #    server_thread = threading.Thread(target=servidor, args=(host, port))
-    #    server_thread.start()
+    for host in hosts:
+        server_thread = threading.Thread(target=servidor, args=(host, port))
+        server_thread.start()
 
     # Menú del cliente para enviar mensajes
     while True:
