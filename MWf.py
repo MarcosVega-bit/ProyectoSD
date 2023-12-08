@@ -16,7 +16,13 @@ class ExclusionMutua:
     def liberar_exclusion_mutua(self, nodo_actual):
         with self.lock:
             self.token_holder = (self.token_holder % self.total_nodos) + 1
-            
+
+hosts = [
+    "192.168.159.130",
+    "192.168.159.134",
+    "192.168.153.130",
+    "192.168.153.131"
+]
 exclusion_mutua = ExclusionMutua(total_nodos=len(hosts))
 
 def cliente(conn, addr):
