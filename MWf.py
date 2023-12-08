@@ -2,6 +2,21 @@ import socket
 import threading
 import time
 
+class ExclusionMutua:
+    def __init__(self, total_nodos):
+        self.total_nodos = total_nodos
+        self.token_holder = 1  # Inicia el token holder en el nodo 1
+        self.lock = threading.Lock()
+
+    def solicitar_exclusion_mutua(self, nodo_actual):
+        with self.lock:
+            while self.token_holder != nodo_actual:
+                pass
+
+    def liberar_exclusion_mutua(self, nodo_actual):
+        with self.lock:
+            self.token_holder = (self.token_holder % self.total_nodos) + 1
+
 def cliente(conn, addr):
     print(f'Conectado por {addr}')
     while True:
