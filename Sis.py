@@ -4,7 +4,7 @@ import sqlite3
 import random
 import MWf
 
-bd = sqlite3.connect('/home/eduardo/base.sqlite')
+bd = sqlite3.connect('/home/marcos_25/base.sqlite')
 cur = bd.cursor()
 idP = 1
 idC = 1
@@ -12,8 +12,8 @@ idC = 1
 if __name__ == "__main__":
     # Configuración de los servidores en cada máquina virtual
     hosts = [
-        "192.168.153.128",
-        "192.168.153.129",
+        "192.168.159.130",
+        "192.168.153.134",
         "192.168.153.130",
         "192.168.153.131"
     ]
