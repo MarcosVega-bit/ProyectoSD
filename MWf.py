@@ -16,6 +16,8 @@ class ExclusionMutua:
     def liberar_exclusion_mutua(self, nodo_actual):
         with self.lock:
             self.token_holder = (self.token_holder % self.total_nodos) + 1
+            
+exclusion_mutua = ExclusionMutua(total_nodos=len(hosts))
 
 def cliente(conn, addr):
     print(f'Conectado por {addr}')
