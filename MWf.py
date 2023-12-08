@@ -1,8 +1,6 @@
 import socket
 import threading
 import time
-import sqlite3
-import random
 
 def cliente(conn, addr):
     print(f'Conectado por {addr}')
@@ -18,7 +16,7 @@ def cliente(conn, addr):
             file.write(f"[Recibido] {time.strftime('%Y-%m-%d %H:%M:%S')} - {received_message}\n")
         
         # Enviar un mensaje de confirmación al cliente
-        confirmation_message = "Recibido"
+        confirmation_message = "El mensaje fue recibido"
         conn.sendall(confirmation_message.encode())
         print(f'Mensaje de confirmación enviado a {addr}: {confirmation_message}')
 
@@ -44,7 +42,7 @@ def mensaje(server_ip, server_port, message):
         print(f"Mensaje enviado a {server_ip}:{server_port}: {mt}")
         
         # Almacenar mensaje enviado en un archivo
-        with open(f"client_messages.txt", "a") as file:
+        with open(f"/home/marcos_25/msgs.txt", "a") as file:
             file.write(f"[Enviado] {t} - {message}\n")
         
         response = s.recv(1024)
@@ -63,12 +61,21 @@ if __name__ == "__main__":
         "192.168.153.130",
         "192.168.153.131"
     ]
-    port = 12345  # Puerto para la comunicación entre las máquinas
-
+    port = [      # Puerto para la comunicación entre las máquinas
+        1111,
+        2222,
+        3333,
+        4444
+    ]
     # Iniciar los servidores en cada máquina virtual
-    for host in hosts:
-        server_thread = threading.Thread(target=servidor, args=(host, port))
-        server_thread.start()
+    vm1 = threading.Thread(target=servidor, args=(hosts[0], port[0]))
+    vm1.start()
+    vm2 = threading.Thread(target=servidor, args=(hosts[1], port[1]))
+    vm2.start()
+    vm3 = threading.Thread(target=servidor, args=(hosts[2], port[2]))
+    vm3.start()
+    vm4 = threading.Thread(target=servidor, args=(hosts[3], port[3]))
+    vm4.start()
 
     # Menú del cliente para enviar mensajes
     while True:
@@ -76,18 +83,18 @@ if __name__ == "__main__":
         for i, host in enumerate(hosts, start=1):
             print(f"{i}. {host}")
 
-        choice = input("Ingrese el número correspondiente al servidor o 'q' para salir: ")
-        if choice.lower() == 'q':
+        choice = input("Ingrese el número correspondiente al servidor o '0' para salir: ")
+        if choice == '0':
             break
 
         try:
             choice_idx = int(choice) - 1
             if 0 <= choice_idx < len(hosts):
                 server_ip = hosts[choice_idx]
+                port_i = port[choice_idx]
                 message = input("Ingrese el mensaje a enviar: ")
-                mensaje(server_ip, port, message)
+                mensaje(server_ip, port_i, message)
             else:
                 print("Opción inválida. Intente de nuevo.")
         except ValueError:
-            print("Entrada inválida. Ingrese un número válido o 'q' para salir.")
-
+            print("Entrada inválida. Ingrese un número válido o '0' para salir.")
