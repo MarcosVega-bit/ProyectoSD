@@ -102,9 +102,12 @@ if __name__ == "__main__":
                 n = input("\nCuál es el nombre del cliente?: ")
                 p = input("\nCuál es el apellido paterno del cliente?: ")
                 m = input("\nCuál es el apellido materno del cliente?: ")
-                cur.execute('INSERT INTO CLIENTE (idCliente, nombre, apPaterno, apMaterno) VALUES (?,?,?,?)',(idC,n,p,m))
-                idC += 1
-                bd.commit()
+                  MWf.exclusion_mutua.solicitar_exclusion_mutua(1)  # El número del nodo que realiza la operación
+                  cur.execute('INSERT INTO CLIENTE (idCliente, nombre, apPaterno, apMaterno) VALUES (?,?,?,?)', (idC, n, p, m))
+                  idC += 1
+                  bd.commit()
+                  MWf.exclusion_mutua.liberar_exclusion_mutua(1)
+                 
                 print("Se agrego el producto ",n," "," ",p," ",m," correctamente")
                 #for host in hosts:
                 #    mensaje(host,port,"cliente")
