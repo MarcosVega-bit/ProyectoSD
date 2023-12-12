@@ -92,7 +92,7 @@ names = [    # Nombres dehost de las máquinas
 ]
 
 # Crea una instancia de EleccionTokenRing con los hosts, la lista de puertos y los nombres
-eleccion_token_ring = EleccionTokenRing(hosts, port, names)
+eleccion_token_ring = EleccionTokenRing(hosts, port)
 
 # Inicia un hilo para manejar la elección y el token ring
 eleccion_thread = threading.Thread(target=eleccion_token_ring.iniciar_anillo)
