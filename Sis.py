@@ -59,7 +59,7 @@ if __name__ == "__main__":
     ipl = ''
     ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     hn = socket.gethostname()
-    ipl = ss.gethostbyname(hn)
+    ipl = socket.gethostbyname(hn)
     
     while (i < idP):
         cur.execute('SELECT total FROM PRODUCTO WHERE idProducto = ?',(i, ))
