@@ -155,3 +155,8 @@ if __name__ == "__main__":
                     print(fila)
         except ValueError:
             print("Entrada inválida. Ingrese un número válido o '0' para salir.")
+
+# Espera a que todos los hilos hayan terminado
+for thread in threading.enumerate():
+    if thread != threading.current_thread():
+        thread.join()
