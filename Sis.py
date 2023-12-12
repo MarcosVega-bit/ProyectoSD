@@ -3,6 +3,7 @@ import threading
 import sqlite3
 import random
 import MWf
+from MWf import EleccionTokenRing 
 
 bd = sqlite3.connect('/home/marcos_25/base.sqlite')
 cur = bd.cursor()
@@ -22,6 +23,12 @@ if __name__ == "__main__":
     maestro = 0 # Bandera que indica que nodo es el maestro
 
     espera = True # Bandera que espera respuesta
+    # Crear una instancia de EleccionTokenRing con los hosts y el puerto
+    eleccion_token_ring = EleccionTokenRing(hosts, port)
+
+    # Iniciar un hilo para manejar la elección y el token ring
+    eleccion_thread = threading.Thread(target=eleccion_token_ring.iniciar_anillo)
+    eleccion_thread.start()
 
     
     cur.execute('DROP TABLE IF EXISTS PRODUCTO')
@@ -92,6 +99,7 @@ if __name__ == "__main__":
         choice = input("Ingrese el número de opción correspondiente o '0' para salir: ")
         if choice == '0':
             break
+        eleccion_token_ring.manejar_token()
         try:
             if choice == '1':
                 cur.execute('SELECT * FROM CLIENTE')
