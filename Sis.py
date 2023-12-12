@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     ipl = ''
     ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    hn = ss.gethostname()
+    hn = socket.gethostname()
     ipl = ss.gethostbyname(hn)
     
     while (i < idP):
