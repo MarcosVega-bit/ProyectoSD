@@ -112,7 +112,7 @@ if __name__ == "__main__":
             else:
                 print(f"{nuevo_maestro} se convirtió en el nuevo maestro.")
         # Menu de seleccion
-        print("\nBienvenido al sistema de inventarios, que deseas hacer?:")
+                print("\nBienvenido al sistema de inventarios, que deseas hacer?:")
         print("\n1. Consultar clientes")
         print("\n2. Agregar nuevo cliente")
         print("\n3. Comprar articulo")
