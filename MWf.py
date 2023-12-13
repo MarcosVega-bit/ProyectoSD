@@ -104,7 +104,7 @@ def cliente(conn, addr):    # Función de cliente, detecta cuando llega un mensa
         conn.sendall(confirmation_message.encode())
         print(f'Mensaje de confirmación enviado a {addr}: {confirmation_message}')
         if maestro:
-        print("¡Alerta! El maestro actual ha fallado. Iniciando proceso de elección de maestro...")
+            print("¡Alerta! El maestro actual ha fallado. Iniciando proceso de elección de maestro...")
         # Lógica para elegir el nuevo maestro, basada en el hostname en este ejemplo
         nuevo_maestro = names[0]  # Elige siempre el primer nodo como nuevo maestro (ajusta según necesites)
         if nuevo_maestro == hn:
