@@ -31,9 +31,9 @@ maestro = False  # Indica si el nodo actual es el maestro
 
 def cliente(conn, addr):    # Función de cliente, detecta cuando llega un mensaje al servidor desde cualquiera de las 4 máquinas virtuales
      global maestro
-    hn = socket.gethostname()
-    print(f'Conectado por {addr}')
-    while True:
+     hn = socket.gethostname()
+     print(f'Conectado por {addr}')
+     while True:
         data = conn.recv(1024)
         if not data:
             break
