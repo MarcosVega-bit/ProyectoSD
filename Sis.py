@@ -122,12 +122,12 @@ if __name__ == "__main__":
             choice = input("Ingrese el número de opción correspondiente o '0' para salir: ")
             if choice == '0':
                 break
-        try:
-            if choice == '1':    # 1. Consultar clientes
-                cur.execute('SELECT * FROM CLIENTE')
-                print("(idCliente, nombre, apPaterno, apMaterno)")
-                for fila in cur:
-                    print(fila)
+            try:
+                if choice == '1':    # 1. Consultar clientes
+                    cur.execute('SELECT * FROM CLIENTE')
+                    print("(idCliente, nombre, apPaterno, apMaterno)")
+                    for fila in cur:
+                        print(fila)
                     
             elif choice == '2':    # 2. Agregar nuevo cliente
                 n = input("\nCuál es el nombre del cliente?: ")
