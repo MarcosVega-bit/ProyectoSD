@@ -104,8 +104,7 @@ if __name__ == "__main__":
     while True:
          if not maestro:
             print("¡Alerta! El maestro actual ha fallado. Iniciando proceso de elección de maestro...")
-            # Lógica para elegir el nuevo maestro, basada en el hostname en este ejemplo
-            nuevo_maestro = names[0]  # Elige siempre el primer nodo como nuevo maestro (ajusta según necesites)
+            nuevo_maestro = names[0]  # Elige siempre el primer nodo como nuevo maestro 
             if nuevo_maestro == socket.gethostname():
                 maestro = True
                 print(f"Soy el nuevo maestro en {socket.gethostname()}")
