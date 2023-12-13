@@ -118,7 +118,7 @@ def cliente(conn, addr):    # Función de cliente, detecta cuando llega un mensa
 def servidor(host, port):        # Función para levantar el servidor
     global maestro
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind((host, port))
+        s.bind(('0.0.0.0', port))
         s.listen(5)
         print(f"Servidor escuchando en {host}:{port}")
 
