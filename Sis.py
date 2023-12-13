@@ -119,9 +119,9 @@ if __name__ == "__main__":
                 print("\n4. Agregar articulo")
                 print("\n5. Consultar envios\n")
 
-        choice = input("Ingrese el número de opción correspondiente o '0' para salir: ")
-        if choice == '0':
-            break
+            choice = input("Ingrese el número de opción correspondiente o '0' para salir: ")
+            if choice == '0':
+                break
         try:
             if choice == '1':    # 1. Consultar clientes
                 cur.execute('SELECT * FROM CLIENTE')
