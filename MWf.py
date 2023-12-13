@@ -3,28 +3,13 @@ import threading
 import sqlite3
 import time
 
-def iniciar_eleccion():
-    global maestro
-    if maestro == 0:
-        eleccion_thread = threading.Thread(target=eleccion_nodo)
-        eleccion_thread.start()
-
-def eleccion_nodo():
-    global maestro
-    print("Iniciando proceso de elección...")
-
-    # Envía un mensaje a todos los nodos informando la falla del maestro
-    for i in range(len(hosts)):
-        mensaje(hosts[i], port[i], "maestro_fallido")
-
-
-bd = sqlite3.connect('/home/eduardo/base.sqlite', check_same_thread=False)
+bd = sqlite3.connect('/home/marcos_25/base.sqlite', check_same_thread=False)
 cur = bd.cursor()
 
 # Configuración de los servidores en cada máquina virtual
 hosts = [
-    "192.168.153.128",
-    "192.168.153.129",
+    "192.168.159.130",
+    "192.168.159.134",
     "192.168.153.130",
     "192.168.153.131"
 ]
@@ -42,9 +27,10 @@ names = [    # Nombres dehost de las máquinas
     "VM4"
 ]
 
-maestro = 0 # Bandera que indica que nodo es el maestro
+maestro = False  # Indica si el nodo actual es el maestro
 
 def cliente(conn, addr):    # Función de cliente, detecta cuando llega un mensaje al servidor desde cualquiera de las 4 máquinas virtuales
+     global maestro
     hn = socket.gethostname()
     print(f'Conectado por {addr}')
     while True:
@@ -117,10 +103,20 @@ def cliente(conn, addr):    # Función de cliente, detecta cuando llega un mensa
         confirmation_message = "El mensaje fue recibido"
         conn.sendall(confirmation_message.encode())
         print(f'Mensaje de confirmación enviado a {addr}: {confirmation_message}')
-
+ if maestro:
+        print("¡Alerta! El maestro actual ha fallado. Iniciando proceso de elección de maestro...")
+        # Lógica para elegir el nuevo maestro, basada en el hostname en este ejemplo
+        nuevo_maestro = names[0]  # Elige siempre el primer nodo como nuevo maestro (ajusta según necesites)
+        if nuevo_maestro == hn:
+            maestro = True
+            print(f"Soy el nuevo maestro en {hn}")
+        else:
+            print(f"{nuevo_maestro} se convirtió en el nuevo maestro.")
+    
     conn.close()
 
 def servidor(host, port):        # Función para levantar el servidor
+    global maestro
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((host, port))
         s.listen(5)
@@ -165,3 +161,10 @@ def getSucId(hn):    # Funcion para obtener el idSucursal a partir del hostname 
         n = 4
     return n
 
+# Lógica para iniciar el servidor según la máquina virtual
+if __name__ == "__main__":
+    hn = socket.gethostname()
+    if hn == names[0]:
+        maestro = True
+    servidor_thread = threading.Thread(target=servidor, args=(hosts[0], port[0]))
+    servidor_thread.start()
