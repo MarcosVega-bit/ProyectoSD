@@ -127,7 +127,7 @@ def servidor(host, port):        # Función para levantar el servidor
             client_thread = threading.Thread(target=cliente, args=(conn, addr))
             client_thread.start()
         if maestro == 0:
-        iniciar_eleccion()
+            iniciar_eleccion()
 
 def mensaje(server_ip, server_port, message):        # Función para mandar mensajes 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
