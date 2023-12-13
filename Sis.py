@@ -129,73 +129,73 @@ if __name__ == "__main__":
                     for fila in cur:
                         print(fila)
                     
-            elif choice == '2':    # 2. Agregar nuevo cliente
-                n = input("\nCuál es el nombre del cliente?: ")
-                p = input("\nCuál es el apellido paterno del cliente?: ")
-                m = input("\nCuál es el apellido materno del cliente?: ")
-                cur.execute('SELECT COUNT(*) FROM CLIENTE')
-                id = cur.fetchone()[0]
-                id += 1
-                ids = str(id)
-                msj = "cliente "+ids+" "+n+" "+p+" "+m
-                MWf.mensaje(hosts[0],port[0],msj)
-                MWf.mensaje(hosts[1],port[1],msj)
-                MWf.mensaje(hosts[2],port[2],msj)
-                MWf.mensaje(hosts[3],port[3],msj)
+                elif choice == '2':    # 2. Agregar nuevo cliente
+                    n = input("\nCuál es el nombre del cliente?: ")
+                    p = input("\nCuál es el apellido paterno del cliente?: ")
+                    m = input("\nCuál es el apellido materno del cliente?: ")
+                    cur.execute('SELECT COUNT(*) FROM CLIENTE')
+                    id = cur.fetchone()[0]
+                    id += 1
+                    ids = str(id)
+                    msj = "cliente "+ids+" "+n+" "+p+" "+m
+                    MWf.mensaje(hosts[0],port[0],msj)
+                    MWf.mensaje(hosts[1],port[1],msj)
+                    MWf.mensaje(hosts[2],port[2],msj)
+                    MWf.mensaje(hosts[3],port[3],msj)
         
-            elif choice == '3':    # 3. Comprar articulo
-                print("\nEste es el inventario del nodo ",MWf.getSucId(hn),": ")
-                cur.execute('SELECT * FROM INVENTARIO')
-                print("(idSucursal, idArticulo, cantidad)")
-                for fila in cur:
-                    print(fila)
-                print("Donde los idArticulo corresponden a: ")
-                cur.execute('SELECT idArticulo, nombre FROM ARTICULO')
-                print("(idArticulo, nombre)")
-                for fila in cur:
-                    print(fila)
-                idp = input("\nCuál es el ID del ARTICULO que deseas comprar?: ")
-                c = input("\nQué cantidad de ARTICULO deseas comprar?: ")
-                idc = input("\nCuál es el su ID de cliente?: ")
-                idps = str(idp)
-                cs = str(c)
-                idcs = str(idc)
-                msj = "compra "+idps+" "+cs+" "+hn+" "+idcs
-                MWf.mensaje(hosts[0],port[0],msj)
-                MWf.mensaje(hosts[1],port[1],msj)
-                MWf.mensaje(hosts[2],port[2],msj)
-                MWf.mensaje(hosts[3],port[3],msj)
+                elif choice == '3':    # 3. Comprar articulo
+                    print("\nEste es el inventario del nodo ",MWf.getSucId(hn),": ")
+                    cur.execute('SELECT * FROM INVENTARIO')
+                    print("(idSucursal, idArticulo, cantidad)")
+                    for fila in cur:
+                        print(fila)
+                    print("Donde los idArticulo corresponden a: ")
+                    cur.execute('SELECT idArticulo, nombre FROM ARTICULO')
+                    print("(idArticulo, nombre)")
+                    for fila in cur:
+                        print(fila)
+                    idp = input("\nCuál es el ID del ARTICULO que deseas comprar?: ")
+                    c = input("\nQué cantidad de ARTICULO deseas comprar?: ")
+                    idc = input("\nCuál es el su ID de cliente?: ")
+                    idps = str(idp)
+                    cs = str(c)
+                    idcs = str(idc)
+                    msj = "compra "+idps+" "+cs+" "+hn+" "+idcs
+                    MWf.mensaje(hosts[0],port[0],msj)
+                    MWf.mensaje(hosts[1],port[1],msj)
+                    MWf.mensaje(hosts[2],port[2],msj)
+                    MWf.mensaje(hosts[3],port[3],msj)
             
-            elif choice == '4':    # 4. Agregar articulo
-                a = input("\nCuál es el nombre del nuevo articulo?: ")
-                p = input("\nCuál es la cantidad total del articulo?: ")
-                cur.execute('SELECT COUNT(*) FROM ARTICULO')
-                id = cur.fetchone()[0]
-                id += 1
-                ids = str(id)
-                msj = "articulo "+ids+" "+a+" "+p
-                MWf.mensaje(hosts[0],port[0],msj)
-                MWf.mensaje(hosts[1],port[1],msj)
-                MWf.mensaje(hosts[2],port[2],msj)
-                MWf.mensaje(hosts[3],port[3],msj)
+                elif choice == '4':    # 4. Agregar articulo
+                    a = input("\nCuál es el nombre del nuevo articulo?: ")
+                    p = input("\nCuál es la cantidad total del articulo?: ")
+                    cur.execute('SELECT COUNT(*) FROM ARTICULO')
+                    id = cur.fetchone()[0]
+                    id += 1
+                    ids = str(id)
+                    msj = "articulo "+ids+" "+a+" "+p
+                    MWf.mensaje(hosts[0],port[0],msj)
+                    MWf.mensaje(hosts[1],port[1],msj)
+                    MWf.mensaje(hosts[2],port[2],msj)
+                    MWf.mensaje(hosts[3],port[3],msj)
                 
-            elif choice == '5':
-                cur.execute('SELECT * FROM ENVIO')
-                print("(idArticulo, idSucursal, idCliente)")
-                for fila in cur:
-                    print(fila)
+                elif choice == '5':
+                    cur.execute('SELECT * FROM ENVIO')
+                    print("(idArticulo, idSucursal, idCliente)")
+                    for fila in cur:
+                        print(fila)
                     
-            elif choice == '6':
-                cur.execute('SELECT * FROM INVENTARIO')
-                print("(idSucursal, idArticulo, cantidad)")
-                for fila in cur:
-                    print(fila)
+                elif choice == '6':
+                    cur.execute('SELECT * FROM INVENTARIO')
+                    print("(idSucursal, idArticulo, cantidad)")
+                    for fila in cur:
+                        print(fila)
                     
-            elif choice == '7':
-                cur.execute('SELECT * FROM ARTICULO')
-                print("(idArticulo, nombre, total)")
-                for fila in cur:
-                    print(fila)
+                elif choice == '7':
+                    cur.execute('SELECT * FROM ARTICULO')
+                    print("(idArticulo, nombre, total)")
+                    for fila in cur:
+                        print(fila)
                     
-        except ValueError:
-            print("Entrada inválida. Ingrese un número válido o '0' para salir.")
+            except ValueError:
+                print("Entrada inválida. Ingrese un número válido o '0' para salir.")
