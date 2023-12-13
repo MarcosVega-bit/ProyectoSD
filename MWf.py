@@ -96,7 +96,7 @@ def cliente(conn, addr):    # Función de cliente, detecta cuando llega un mensa
                 bd.commit()
         
         # Almacenar mensaje recibido en un archivo
-        with open(f"/home/eduardo/msgs.txt", "a") as file:
+        with open(f"/home/marcos_25/msgs.txt", "a") as file:
             file.write(f"[Recibido] {time.strftime('%Y-%m-%d_%H:%M:%S')} - {received_message}\n")
         
         # Enviar un mensaje de confirmación al cliente
@@ -138,7 +138,7 @@ def mensaje(server_ip, server_port, message):        # Función para mandar mens
         print(f"Mensaje enviado a {server_ip}:{server_port}: {mt}")
         
         # Almacenar mensaje enviado en un archivo
-        with open(f"/home/eduardo/msgs.txt", "a") as file:
+        with open(f"/home/marcos_25/msgs.txt", "a") as file:
             file.write(f"[Enviado] {t} - {message}\n")
         
         response = s.recv(1024)
