@@ -113,7 +113,7 @@ def cliente(conn, addr):    # Función de cliente, detecta cuando llega un mensa
         else:
             print(f"{nuevo_maestro} se convirtió en el nuevo maestro.")
     
-    conn.close()
+        conn.close()
 
 def servidor(host, port):        # Función para levantar el servidor
     global maestro
